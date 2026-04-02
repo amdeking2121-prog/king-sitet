@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investment App</title>
+<style>
+body {font-family: Arial; margin:0; background:#f5f5f5;}
+.container {padding:20px; padding-bottom:80px;}
+input, button {width:100%; padding:10px; margin:8px 0; border:none; border-radius:5px;}
+.green{background:green;color:white;}
+.yellow{background:gold;color:black;}
+.red{background:red;color:white;}
+.card{background:white;padding:15px;margin:10px 0;border-radius:10px;}
+.hidden{display:none;}
+#nav{position:fixed;bottom:0;width:100%;display:flex;justify-content:space-around;background:#ddd;padding:10px;}
+</style>
+</head>
+<body>
+
+<!-- REGISTER -->
+<div class="container" id="register">
+<h2>Register</h2>
+<input id="phone" placeholder="+251912345678">
+<input id="pass" type="password" placeholder="123456">
+<input id="confirm" type="password" placeholder="Confirm Password">
+<button class="green" onclick="register()">Register</button>
+</div>
+
+<!-- LOGIN -->
+<div class="container hidden" id="login">
+<h2>Login</h2>
+<input id="loginPhone" class="green" placeholder="Phone">
+<input id="loginPass" class="yellow" type="password" placeholder="Password">
+<button class="red" onclick="login()">Login</button>
+</div>
+
+<!-- HOME -->
+<div class="container hidden" id="home">
+<h2>HOME</h2>
+<button class="red">Deposit</button>
+<button class="yellow">Withdraw</button>
+</div>
+
+<!-- KING -->
+<div class="container hidden" id="king">
+<h2>Product Investment</h2>
+<div class="card">
+<p>King Amde - 1000 Birr | 50/day | 40 days = 4000</p>
+<button class="green" onclick="alert('Invested')">Invest</button>
+</div>
+<div class="card">
+<p>King Solomon - 5000 Birr | 300/day | 40 days = 12000</p>
+<button class="green" onclick="alert('Invested')">Invest</button>
+</div>
+<div class="card">
+<p>King Tewdros - 300000 Birr | 1000 days = 120000000</p>
+<button class="green" onclick="alert('Invested')">Invest</button>
+</div>
+</div>
+
+<!-- TEAM -->
+<div class="container hidden" id="tema">
+<h2>Team</h2>
+<p>Invitation Link: <button onclick="copyLink()">Copy</button></p>
+<p>Total Team</p>
+<p>L1</p>
+<p>L2</p>
+<p>L3</p>
+</div>
+
+<!-- PROFILE -->
+<div class="container hidden" id="profile">
+<h2>Profile</h2>
+<p>Today Income</p>
+<p>Total Income</p>
+<p>Bind Bank</p>
+</div>
+
+<!-- NAVIGATION -->
+<div id="nav" class="hidden">
+<button onclick="showPage('home')">🏠 Home</button>
+<button onclick="showPage('king')">👑 King</button>
+<button onclick="showPage('tema')">👥 Team</button>
+<button onclick="showPage('profile')">👤 Profile</button>
+</div>
+
+<script>
+let savedPhone = "";
+let savedPass = "";
+
+function register(){
+ let p = document.getElementById('phone').value;
+ let pass = document.getElementById('pass').value;
+ let c = document.getElementById('confirm').value;
+ if(pass.length!==6){alert('Password must be 6 digits'); return;}
+ if(pass!==c){alert('Passwords not match'); return;}
+ savedPhone = p;
+ savedPass = pass;
+ alert('Congra register successful');
+ document.getElementById('register').classList.add('hidden');
+ document.getElementById('login').classList.remove('hidden');
+ document.getElementById('loginPhone').value = p;
+ document.getElementById('loginPass').value = pass;
+}
+
+function login(){
+ let p = document.getElementById('loginPhone').value;
+ let pass = document.getElementById('loginPass').value;
+ if(p===savedPhone && pass===savedPass){
+ document.getElementById('login').classList.add('hidden');
+ document.getElementById('home').classList.remove('hidden');
+ document.getElementById('nav').classList.remove('hidden');
+ } else {alert('Wrong login');}
+}
+
+function showPage(page){
+ document.getElementById('home').classList.add('hidden');
+ document.getElementById('king').classList.add('hidden');
+ document.getElementById('tema').classList.add('hidden');
+ document.getElementById('profile').classList.add('hidden');
+ document.getElementById(page).classList.remove('hidden');
+}
+
+function copyLink(){
+ navigator.clipboard.writeText('https://example.com/invite');
+ alert('Copied');
+}
+</script>
+
+</body>
+</html>
